@@ -7,5 +7,5 @@
 
 int main()
 {
-	return mon::test_runner::run_all();
+  return mon::test_runner::run_all();
 }

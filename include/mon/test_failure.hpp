@@ -9,22 +9,22 @@
 
 namespace mon
 {
-	class test_failure
-	{
-	private:
-		std::string file_;
+  class test_failure
+  {
+  private:
+    std::string file_;
 
-		int line_;
+    int line_;
 
-		std::string text_;
+    std::string text_;
 
-	public:
-		test_failure(const std::string& file, int line, const std::string& text);
+  public:
+    test_failure(const std::string& file, int line, const std::string& text);
 
-		std::string file() const;
+    std::string file() const;
 
-		int line() const;
+    int line() const;
 
-		std::string text() const;
-	};
+    std::string text() const;
+  };
 }

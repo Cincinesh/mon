@@ -7,14 +7,14 @@
 
 namespace mon
 {
-	class test_runner
-	{
-		test_runner() = delete;
-		test_runner(const test_runner&) = delete;
-		~test_runner() = delete;
-		test_runner& operator=(const test_runner&) = delete;
+  class test_runner
+  {
+    test_runner() = delete;
+    test_runner(const test_runner&) = delete;
+    ~test_runner() = delete;
+    test_runner& operator=(const test_runner&) = delete;
 
-	public:
-		static int run_all();
-	};
+  public:
+    static int run_all();
+  };
 }

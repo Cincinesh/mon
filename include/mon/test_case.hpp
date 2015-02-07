@@ -11,47 +11,48 @@
 
 namespace mon
 {
-	class test_case
-	{
-		friend class test_runner;
+  class test_case
+  {
+    friend class test_runner;
 
-	public:
-		using function_ptr_t = void(*)();
+  public:
+    using function_ptr_t = void(*)();
 
-	private:
-		static std::map<std::string, std::vector<const test_case*>>& global_collection_();
+  private:
+    static std::map<std::string, std::vector<const test_case*>>&
+    global_collection_();
 
-		std::string file_;
+    std::string file_;
 
-		int line_;
+    int line_;
 
-		std::string name_;
+    std::string name_;
 
-		function_ptr_t function_ptr_;
+    function_ptr_t function_ptr_;
 
-	public:
-		test_case(
-			const std::string& file,
-			int line,
-			const std::string& name,
-			function_ptr_t function_ptr,
-			bool should_add_to_global_collection = false);
+  public:
+    test_case(
+        const std::string& file,
+        int line,
+        const std::string& name,
+        function_ptr_t function_ptr,
+        bool should_add_to_global_collection = false);
 
-		std::string file() const;
+    std::string file() const;
 
-		int line() const;
+    int line() const;
 
-		std::string name() const;
+    std::string name() const;
 
-		function_ptr_t function_ptr() const;
+    function_ptr_t function_ptr() const;
 
-		void run() const;
+    void run() const;
 
-		static void throw_test_failure(
-			const std::string& file,
-			int line,
-			const std::string& text);
-	};
+    static void throw_test_failure(
+        const std::string& file,
+        int line,
+        const std::string& text);
+  };
 }
 
 #ifdef _MSC_VER
@@ -70,10 +71,10 @@ namespace TEST_CASE_##name \
 void TEST_CASE_##name::function_()
 
 #define test_assert(condition) static_cast<void>( \
-	static_cast<bool>(condition) \
-	|| (::mon::test_case::throw_test_failure( \
-		__FILE__, __LINE__, "test_assert("#condition") failed"), 0))
+  static_cast<bool>(condition) \
+  || (::mon::test_case::throw_test_failure( \
+      __FILE__, __LINE__, "test_assert("#condition") failed"), 0))
 
 #define test_fail(info) \
-	::mon::test_case::throw_test_failure( \
-		__FILE__, __LINE__, "test_fail("#info")")
+  ::mon::test_case::throw_test_failure( \
+      __FILE__, __LINE__, "test_fail("#info")")
