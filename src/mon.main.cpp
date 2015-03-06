@@ -5,7 +5,6 @@
 
 #include <mon/test_runner.hpp>
 
-int main()
-{
+int main() {
   return mon::test_runner::run_all();
 }

@@ -5,68 +5,47 @@
 
 #pragma once
 
-#include <map>
 #include <string>
-#include <vector>
 
-// The Monday C++ unit test framework.
-namespace mon
+namespace mon {
+
+class test_case
 {
-  // A single test case.
-  class test_case
-  {
-    friend class test_runner;
+public:
+  using function_ptr_t = void(*)();
 
-  public:
-    // A test_case function pointer.
-    using function_ptr_t = void(*)();
+private:
+  std::string file_;
+  int line_;
+  std::string name_;
+  function_ptr_t function_ptr_;
 
-  private:
-    static std::map<std::string, std::vector<const test_case*>>&
-    global_collection_();
+public:
+  test_case(
+      const std::string& file,
+      int line,
+      const std::string& name,
+      function_ptr_t function_ptr,
+      bool should_add_to_test_runner = false);
 
-    std::string file_;
+  std::string file() const;
 
-    int line_;
+  int line() const noexcept;
 
-    std::string name_;
+  std::string name() const;
 
-    function_ptr_t function_ptr_;
+  function_ptr_t function_ptr() const noexcept;
 
-  public:
-    // Constructs a new test_case with the given properties.
-    test_case(
-        const std::string& file,
-        int line,
-        const std::string& name,
-        function_ptr_t function_ptr,
-        bool should_add_to_global_collection = false);
+  void run() const;
 
-    // Returns the name of the file this test_case was defined in.
-    std::string file() const;
+  static void fail(
+      const std::string& file,
+      int line,
+      const std::string& text);
+};
 
-    // Returns the line number this test_case starts on.
-    int line() const;
-
-    // Returns the name of this test_case.
-    std::string name() const;
-
-    // Returns a pointer to this test_case's function.
-    function_ptr_t function_ptr() const;
-
-    // Runs this test_case.
-    void run() const;
-
-    // Throws a test_failure from within a test_case.
-    static void throw_test_failure(
-        const std::string& file,
-        int line,
-        const std::string& text);
-  };
 }
 
-// Evaluate to constexpr when the compiler fully support C++11 constexpr, and
-// imply const otherwise.
 // TODO: Remove this once Visual Studio 2015 fully supports C++11 constexpr.
 #ifdef _MSC_VER
 #define CONST_OR_CONSTEXPR const
@@ -74,7 +53,6 @@ namespace mon
 #define CONST_OR_CONSTEXPR constexpr
 #endif
 
-// Defines a new TEST_CASE.
 #define TEST_CASE(name) \
 namespace TEST_CASE_##name \
 { \
@@ -84,14 +62,11 @@ namespace TEST_CASE_##name \
 } \
 void TEST_CASE_##name::function_()
 
-// Checks the given condition and throws a test_failure if the condition isn't
-// true.
 #define test_assert(condition) static_cast<void>( \
   static_cast<bool>(condition) \
-  || (::mon::test_case::throw_test_failure( \
+  || (::mon::test_case::fail( \
       __FILE__, __LINE__, "test_assert("#condition") failed"), 0))
 
-// Throws a test_failure with the given info.
 #define test_fail(info) \
-  ::mon::test_case::throw_test_failure( \
+  ::mon::test_case::fail( \
       __FILE__, __LINE__, "test_fail("#info")")

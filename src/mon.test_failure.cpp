@@ -4,30 +4,26 @@
 //          http://www.boost.org/LICENSE_1_0.txt)
 
 #include <mon/test_failure.hpp>
+#include <string>
 
 using namespace std;
 
-namespace mon
-{
-  test_failure::test_failure(const string& file, int line, const string& text)
-    : file_(file),
-      line_(line),
-      text_(text)
-  {
-  }
+namespace mon {
 
-  string test_failure::file() const
-  {
-    return file_;
-  }
+test_failure::test_failure(const string& file, int line, const string& text)
+  : file_(file), line_(line), text_(text) {
+}
 
-  int test_failure::line() const
-  {
-    return line_;
-  }
+string test_failure::file() const {
+  return file_;
+}
 
-  string test_failure::text() const
-  {
-    return text_;
-  }
+int test_failure::line() const noexcept {
+  return line_;
+}
+
+string test_failure::text() const {
+  return text_;
+}
+
 }
