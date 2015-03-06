@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{13335157-d0e9-4f4e-9ff0-cb67f81a1e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{6a3b0329-bf2b-4c5c-8d5c-b7fca43c66e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\mon">
+      <UniqueIdentifier>{8765d12c-0ba0-4247-9ac2-61019697b429}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\mon\test_case.hpp">
+      <Filter>include\mon</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mon\test_failure.hpp">
+      <Filter>include\mon</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mon\test_runner.hpp">
+      <Filter>include\mon</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\mon.test_case.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mon.test_failure.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mon.test_runner.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
