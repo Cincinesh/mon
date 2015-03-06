@@ -79,23 +79,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)build\winapi-$(Platform)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)build\winapi-$(Platform)-$(Configuration)\libmon\</IntDir>
+    <OutDir>$(SolutionDir)build\win32-$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build\win32-$(Platform)-$(Configuration)\libmon\</IntDir>
     <TargetName>libmon</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)build\winapi-$(Platform)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)build\winapi-$(Platform)-$(Configuration)\libmon\</IntDir>
+    <OutDir>$(SolutionDir)build\win32-$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build\win32-$(Platform)-$(Configuration)\libmon\</IntDir>
     <TargetName>libmon</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)build\winapi-$(Platform)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)build\winapi-$(Platform)-$(Configuration)\libmon\</IntDir>
+    <OutDir>$(SolutionDir)build\win32-$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build\win32-$(Platform)-$(Configuration)\libmon\</IntDir>
     <TargetName>libmon</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)build\winapi-$(Platform)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)build\winapi-$(Platform)-$(Configuration)\libmon\</IntDir>
+    <OutDir>$(SolutionDir)build\win32-$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build\win32-$(Platform)-$(Configuration)\libmon\</IntDir>
     <TargetName>libmon</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
