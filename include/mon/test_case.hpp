@@ -38,10 +38,7 @@ public:
 
   void run() const;
 
-  static void fail(
-      const std::string& file,
-      int line,
-      const std::string& text);
+  static void fail(const std::string& file, int line, const std::string& text);
 };
 
 }

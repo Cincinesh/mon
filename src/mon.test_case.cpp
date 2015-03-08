@@ -48,10 +48,7 @@ void test_case::run() const {
   function_ptr_();
 }
 
-void test_case::fail(
-    const string& file,
-    int line,
-    const string& text) {
+void test_case::fail(const string& file, int line, const string& text) {
   throw test_failure(file, line, text);
 }
 
