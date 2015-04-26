@@ -40,6 +40,14 @@ void test_runner::add(const test_case* tcase) {
 }
 
 int test_runner::run_all() noexcept {
+#ifdef _MSC_VER
+  const auto preline = "(";
+  const auto postline = "): error: ";
+#else
+  const auto preline = ":";
+  const auto postline = ": error: ";
+#endif
+
   int status = EXIT_SUCCESS;
 
   for (const auto& entry : test_case_map_()) {
@@ -56,14 +64,14 @@ int test_runner::run_all() noexcept {
         tcase->run();
         success = true;
       } catch (const test_failure& f) {
-        cerr << f.file() << "(" << f.line() << "): error: "
+        cerr << f.file() << preline << f.line() << postline
              << f.text() << endl;
       } catch (const exception& e) {
-        cerr << tcase->file() << "(" << tcase->line() << "): error: "
+        cerr << tcase->file() << preline << tcase->line() << postline
              << tcase->name() << " threw an exception: "
              << e.what() << endl;
       } catch (...) {
-        cerr << tcase->file() << "(" << tcase->line() << "): error: "
+        cerr << tcase->file() << preline << tcase->line() << postline
              << tcase->name() << " threw a non-standard exception" << endl;
       }
 
