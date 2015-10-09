@@ -55,7 +55,7 @@ namespace
 ~~~
 
 That's it! Just make sure to include `<mon/test_case.hpp>` and write
-`TEST_CASE()`'sThe `main()` function provided by `src/main.cpp` will
+`TEST_CASE()`'s. The `main()` function provided by `src/main.cpp` will
 automatically run any `TEST_CASE()` compiled and linked in the same executable.
 
 Monday will treat any exception thrown by a `TEST_CASE()` as a test failure.
