@@ -53,7 +53,6 @@ namespace mon
         const auto preline = ":";
         const auto postline = ": error: ";
 #endif
-
         int status = EXIT_SUCCESS;
 
         for (const auto& entry : test_case_map_())

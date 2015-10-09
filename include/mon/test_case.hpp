@@ -51,27 +51,20 @@ namespace mon
     };
 }
 
-// TODO: Remove this once Visual Studio 2015 fully supports C++11 constexpr.
-#ifdef _MSC_VER
-#define CONST_OR_CONSTEXPR const
-#else
-#define CONST_OR_CONSTEXPR constexpr
-#endif
-
 #define TEST_CASE(name) \
 namespace TEST_CASE_##name \
 { \
     void function_(); \
-    ::mon::test_case TEST_CASE_##name( \
+    mon::test_case TEST_CASE_##name( \
         __FILE__, __LINE__, "TEST_CASE("#name")", &function_, true); \
 } \
 void TEST_CASE_##name::function_()
 
 #define test_assert(condition) static_cast<void>( \
     static_cast<bool>(condition) \
-    || (::mon::test_case::fail( \
+    || (mon::test_case::fail( \
         __FILE__, __LINE__, "test_assert("#condition") failed"), 0))
 
 #define test_fail(info) \
-    ::mon::test_case::fail( \
+    mon::test_case::fail( \
         __FILE__, __LINE__, "test_fail("#info")")
