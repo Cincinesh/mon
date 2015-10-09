@@ -14,4 +14,6 @@ add_executable(
     src/main.cpp
     src/mon.test_case.cpp
     src/mon.test_failure.cpp
-    src/mon.test_runner.cpp)
+    src/mon.test_runner.cpp
+    LICENSE_1_0.txt
+    README.md)
