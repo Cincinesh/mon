@@ -44,7 +44,7 @@ namespace
         try
         {
             myfoo.baz();
-            assert_fail("myfoo.baz() didn't throw an exception as expected.");
+            test_fail("myfoo.baz() didn't throw an exception as expected.");
         }
         catch (...)
         {
