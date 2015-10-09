@@ -21,73 +21,93 @@
 
 using namespace std;
 
-namespace {
-using namespace mon;
+namespace
+{
+    using namespace mon;
 
-map<string, vector<const test_case*>>& test_case_map_() {
-  static map<string, vector<const test_case*>> value;
-  return value;
+    map<string, vector<const test_case*>>& test_case_map_()
+    {
+        static map<string, vector<const test_case*>> value;
+        return value;
+    }
 }
 
-}
+namespace mon
+{
+    void test_runner::add(const test_case* tcase)
+    {
+        const auto emplace_result = test_case_map_().emplace(
+            piecewise_construct,
+            forward_as_tuple(tcase->file()),
+            forward_as_tuple());
+        auto& tcases = emplace_result.first->second;
+        tcases.push_back(tcase);
+    }
 
-namespace mon {
-
-void test_runner::add(const test_case* tcase) {
-  const auto emplace_result = test_case_map_().emplace(
-      piecewise_construct,
-      forward_as_tuple(tcase->file()),
-      forward_as_tuple());
-  auto& tcases = emplace_result.first->second;
-  tcases.push_back(tcase);
-}
-
-int test_runner::run_all() noexcept {
+    int test_runner::run_all() noexcept
+    {
 #ifdef _MSC_VER
-  const auto preline = "(";
-  const auto postline = "): error: ";
+        const auto preline = "(";
+        const auto postline = "): error: ";
 #else
-  const auto preline = ":";
-  const auto postline = ": error: ";
+        const auto preline = ":";
+        const auto postline = ": error: ";
 #endif
 
-  int status = EXIT_SUCCESS;
+        int status = EXIT_SUCCESS;
 
-  for (const auto& entry : test_case_map_()) {
-    const auto& file = entry.first;
-    const auto& tcases = entry.second;
+        for (const auto& entry : test_case_map_())
+        {
+            const auto& file = entry.first;
+            const auto& tcases = entry.second;
 
-    cout << "Running test cases in " << file << endl;
-    for (const auto& tcase : tcases) {
-      cout << "  " << tcase->name() << "..." << endl;
-      cout.flush();
+            cout << "Running test cases in " << file << endl;
+            for (const auto& tcase : tcases)
+            {
+                cout << "  " << tcase->name() << "..." << endl;
+                cout.flush();
 
-      bool success = false;
-      try {
-        tcase->run();
-        success = true;
-      } catch (const test_failure& f) {
-        cerr << f.file() << preline << f.line() << postline
-             << f.text() << endl;
-      } catch (const exception& e) {
-        cerr << tcase->file() << preline << tcase->line() << postline
-             << tcase->name() << " threw an exception: "
-             << e.what() << endl;
-      } catch (...) {
-        cerr << tcase->file() << preline << tcase->line() << postline
-             << tcase->name() << " threw a non-standard exception" << endl;
-      }
+                bool success = false;
+                try
+                {
+                    tcase->run();
+                    success = true;
+                }
+                catch (const test_failure& f)
+                {
+                    cerr << f.file()
+                         << preline << f.line() << postline
+                         << f.text()
+                         << endl;
+                }
+                catch (const exception& e)
+                {
+                    cerr << tcase->file()
+                         << preline << tcase->line() << postline
+                         << tcase->name() << " threw an exception: "
+                         << e.what()
+                         << endl;
+                }
+                catch (...)
+                {
+                    cerr << tcase->file()
+                         << preline << tcase->line() << postline
+                         << tcase->name() << " threw a non-standard exception"
+                         << endl;
+                }
 
-      if (success) {
-        cout << "  SUCCESS" << endl;
-      } else {
-        cout << "  FAILURE" << endl;
-        status = EXIT_FAILURE;
-      }
+                if (success)
+                {
+                    cout << "  SUCCESS" << endl;
+                }
+                else
+                {
+                    cout << "  FAILURE" << endl;
+                    status = EXIT_FAILURE;
+                }
+            }
+        }
+            
+        return status;
     }
-  }
-
-  return status;
-}
-
 }

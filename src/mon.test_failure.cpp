@@ -12,22 +12,26 @@
 
 using namespace std;
 
-namespace mon {
+namespace mon
+{
+    test_failure::test_failure(const string& file, int line, const string& text)
+    :
+        file_(file), line_(line), text_(text)
+    {
+    }
 
-test_failure::test_failure(const string& file, int line, const string& text)
-  : file_(file), line_(line), text_(text) {
-}
+    string test_failure::file() const
+    {
+        return file_;
+    }
 
-string test_failure::file() const {
-  return file_;
-}
+    int test_failure::line() const noexcept
+    {
+        return line_;
+    }
 
-int test_failure::line() const noexcept {
-  return line_;
-}
-
-string test_failure::text() const {
-  return text_;
-}
-
+    string test_failure::text() const
+    {
+        return text_;
+    }
 }

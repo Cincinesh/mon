@@ -14,45 +14,53 @@
 
 using namespace std;
 
-namespace mon {
+namespace mon
+{
+    test_case::test_case(
+        const string& file,
+        int line,
+        const string& name,
+        function_ptr_t function_ptr,
+        bool should_add_to_test_runner)
+    :
+        file_(file),
+        line_(line),
+        name_(name),
+        function_ptr_(function_ptr)
+    {
+        if (should_add_to_test_runner)
+        {
+            test_runner::add(this);
+        }
+    }
 
-test_case::test_case(
-    const string& file,
-    int line,
-    const string& name,
-    function_ptr_t function_ptr,
-    bool should_add_to_test_runner)
-  : file_(file),
-    line_(line),
-    name_(name),
-    function_ptr_(function_ptr) {
-  if (should_add_to_test_runner) {
-    test_runner::add(this);
-  }
-}
+    string test_case::file() const
+    {
+        return file_;
+    }
 
-string test_case::file() const {
-  return file_;
-}
+    int test_case::line() const noexcept
+    {
+        return line_;
+    }
 
-int test_case::line() const noexcept {
-  return line_;
-}
+    string test_case::name() const
+    {
+        return name_;
+    }
 
-string test_case::name() const {
-  return name_;
-}
+    test_case::function_ptr_t test_case::function_ptr() const noexcept
+    {
+        return function_ptr_;
+    }
 
-test_case::function_ptr_t test_case::function_ptr() const noexcept {
-  return function_ptr_;
-}
+    void test_case::run() const
+    {
+        function_ptr_();
+    }
 
-void test_case::run() const {
-  function_ptr_();
-}
-
-void test_case::fail(const string& file, int line, const string& text) {
-  throw test_failure(file, line, text);
-}
-
+    void test_case::fail(const string& file, int line, const string& text)
+    {
+        throw test_failure(file, line, text);
+    }
 }

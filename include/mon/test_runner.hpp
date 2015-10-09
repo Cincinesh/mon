@@ -8,15 +8,14 @@
 
 #pragma once
 
-namespace mon {
-
-class test_case;
-
-namespace test_runner
+namespace mon
 {
-  void add(const test_case* tcase);
+    class test_case;
 
-  int run_all() noexcept;
-}
+    namespace test_runner
+    {
+        void add(const test_case* tcase);
 
+        int run_all() noexcept;
+    }
 }

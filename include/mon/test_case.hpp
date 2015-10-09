@@ -10,40 +10,45 @@
 
 #include <string>
 
-namespace mon {
-
-class test_case
+namespace mon
 {
-public:
-  using function_ptr_t = void(*)();
+    class test_case
+    {
+    public:
+        using function_ptr_t = void(*)();
 
-private:
-  std::string file_;
-  int line_;
-  std::string name_;
-  function_ptr_t function_ptr_;
+    private:
+        std::string file_;
+        
+        int line_;
+        
+        std::string name_;
+        
+        function_ptr_t function_ptr_;
 
-public:
-  test_case(
-      const std::string& file,
-      int line,
-      const std::string& name,
-      function_ptr_t function_ptr,
-      bool should_add_to_test_runner = false);
+    public:
+        test_case(
+            const std::string& file,
+            int line,
+            const std::string& name,
+            function_ptr_t function_ptr,
+            bool should_add_to_test_runner = false);
 
-  std::string file() const;
+        std::string file() const;
 
-  int line() const noexcept;
+        int line() const noexcept;
 
-  std::string name() const;
+        std::string name() const;
 
-  function_ptr_t function_ptr() const noexcept;
+        function_ptr_t function_ptr() const noexcept;
 
-  void run() const;
+        void run() const;
 
-  static void fail(const std::string& file, int line, const std::string& text);
-};
-
+        static void fail(
+            const std::string& file,
+            int line,
+            const std::string& text);
+    };
 }
 
 // TODO: Remove this once Visual Studio 2015 fully supports C++11 constexpr.
@@ -56,17 +61,17 @@ public:
 #define TEST_CASE(name) \
 namespace TEST_CASE_##name \
 { \
-  void function_(); \
-  ::mon::test_case TEST_CASE_##name( \
-      __FILE__, __LINE__, "TEST_CASE("#name")", &function_, true); \
+    void function_(); \
+    ::mon::test_case TEST_CASE_##name( \
+        __FILE__, __LINE__, "TEST_CASE("#name")", &function_, true); \
 } \
 void TEST_CASE_##name::function_()
 
 #define test_assert(condition) static_cast<void>( \
-  static_cast<bool>(condition) \
-  || (::mon::test_case::fail( \
-      __FILE__, __LINE__, "test_assert("#condition") failed"), 0))
+    static_cast<bool>(condition) \
+    || (::mon::test_case::fail( \
+        __FILE__, __LINE__, "test_assert("#condition") failed"), 0))
 
 #define test_fail(info) \
-  ::mon::test_case::fail( \
-      __FILE__, __LINE__, "test_fail("#info")")
+    ::mon::test_case::fail( \
+        __FILE__, __LINE__, "test_fail("#info")")

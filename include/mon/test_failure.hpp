@@ -10,23 +10,27 @@
 
 #include <string>
 
-namespace mon {
-
-class test_failure
+namespace mon
 {
-private:
-  std::string file_;
-  int line_;
-  std::string text_;
+    class test_failure
+    {
+    private:
+        std::string file_;
+        
+        int line_;
+        
+        std::string text_;
 
-public:
-  test_failure(const std::string& file, int line, const std::string& text);
+    public:
+        test_failure(
+            const std::string& file,
+            int line,
+            const std::string& text);
 
-  std::string file() const;
+        std::string file() const;
 
-  int line() const noexcept;
+        int line() const noexcept;
 
-  std::string text() const;
-};
-
+        std::string text() const;
+    };
 }
