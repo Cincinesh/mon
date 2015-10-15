@@ -2,10 +2,6 @@ The Monday C++ Unit Test Framework
 ==================================
 The Monday C++ Unit Test Framework is a small and easy to use test framework.
 
-Status
-------
-Monday is currently a work-in-progress and has no version numbering scheme.
-
 Requirements
 ------------
 Monday requires Visual Studio 2015 or a fully C++11 compliant compiler such as
