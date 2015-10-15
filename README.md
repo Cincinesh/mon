@@ -15,9 +15,9 @@ Usage
 -----
 To make a test suite using Monday, simply make sure the `include` directory in
 the root of this project is on your include path and all the `.cpp` files under
-the `src` directory are compiled and linked with your test suite. For GCC and
-Clang, you might have to provide the compiler option `-std=c++11` or higher as
-well if you aren't already.
+the `src` directory are compiled and linked into your executable binary. For GCC
+and Clang, you might have to provide the compiler option `-std=c++11` or higher
+as well if you aren't already.
 
 With the Monday code hooked in to your test suite, the only thing left to do is
 write test files like this:
@@ -61,6 +61,13 @@ automatically run any `TEST_CASE()` compiled and linked in the same executable.
 Monday will treat any exception thrown by a `TEST_CASE()` as a test failure.
 Additionally, you can use the macros `test_assert()` and `test_fail()` as shown
 above to specify other failure conditions.
+
+The error output format is meant to match that of your C++ compiler, so if you
+configure your IDE to run your test suite as a post-link step, it should be able
+to highlight test failures in your code as if they were compiler errors.
+
+See [Tuesday](https://github.com/Cincinesh/tue) for an example of a project that
+uses Monday.
 
 License
 -------
