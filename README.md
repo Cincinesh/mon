@@ -33,7 +33,7 @@ namespace
         foo myfoo;
         test_assert(myfoo.bar() == 123);
     }
-    
+
     TEST_CASE(baz)
     {
         foo myfoo;

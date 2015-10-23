@@ -16,9 +16,9 @@ namespace mon
     {
     private:
         std::string file_;
-        
+
         int line_;
-        
+
         std::string text_;
 
     public:

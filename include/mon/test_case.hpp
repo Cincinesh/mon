@@ -19,11 +19,11 @@ namespace mon
 
     private:
         std::string file_;
-        
+
         int line_;
-        
+
         std::string name_;
-        
+
         function_ptr_t function_ptr_;
 
     public:
